@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BFF | Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap');
+        
+        :root {
+            --midnight-lagoon: rgb(32, 42, 53);
+            --misty-sky: rgb(169, 183, 198);
+            --sage-leaf: rgb(168, 181, 138);
+            --rosewood: rgb(180, 106, 114);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--midnight-lagoon);
+            color: #FFFFFF;
+            -webkit-tap-highlight-color: transparent;
+            background-image: radial-gradient(rgba(169, 183, 198, 0.05) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98) translateY(8px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Ombres Brutalistes Hard-Edge */
+        .brutal-shadow-sage {
+            box-shadow: 6px 6px 0px 0px var(--sage-leaf);
+        }
+        .brutal-shadow-rose {
+            box-shadow: 6px 6px 0px 0px var(--rosewood);
+        }
+        .brutal-shadow-sky {
+            box-shadow: 6px 6px 0px 0px rgba(169, 183, 198, 0.3);
+        }
+
+        .bg-sky { background-color: var(--misty-sky); }
+        .text-sky { color: var(--misty-sky); }
+        .border-sky { border-color: var(--misty-sky); }
+        
+        .bg-sage { background-color: var(--sage-leaf); }
+        .text-sage { color: var(--sage-leaf); }
+        .border-sage { border-color: var(--sage-leaf); }
+        
+        .bg-rosewood { background-color: var(--rosewood); }
+        .text-rosewood { color: var(--rosewood); }
+        .border-rosewood { border-color: var(--rosewood); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(-0.5deg); }
+            50% { transform: translateY(-5px) rotate(0.5deg); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 sm:p-8 select-none relative">
+
+    <!-- En-tête global de l'application -->
+    <header class="w-full max-w-xl mx-auto flex justify-between items-center border-b-4 border-[#1a232c] bg-[#283543] p-4 rounded-xl brutal-shadow-sky" style="margin-bottom: 0;">
+        <div class="flex items-center gap-3">
+            <span class="text-xs font-mono font-black tracking-widest text-rosewood bg-[#1a232c] px-2 py-1 rounded">BFF |/\| TEST</span>
+            <span id="header-game-mode" class="text-xs uppercase font-extrabold tracking-wider bg-sage text-[#2D3A47] px-2.5 py-0.5 rounded-md">Sélection</span>
+        </div>
+        <button id="header-icon-btn" class="text-lg focus:outline-none transition active:scale-75 cursor-default bg-[#1a232c] w-8 h-8 rounded-lg flex items-center justify-center border border-sky/20" disabled>
+            <span id="header-icon">🏠︎</span>
+        </button>
+    </header>
+
+    <!-- Zone principale plein écran -->
+    <main class="w-full max-w-xl mx-auto flex-grow flex flex-col justify-center py-8">
+        <div id="screen-container" class="w-full fade-in">
+            <!-- Injecté dynamiquement -->
+        </div>
+    </main>
+
+    <!-- Barre de contrôle basse épurée -->
+    <footer class="w-full max-w-xl mx-auto border-t-2 border-sky/20 pt-4 flex justify-between items-center z-10">
+        <button id="nav-back-btn" class="bg-rosewood text-white px-5 py-2.5 rounded-xl text-xs font-black tracking-wider uppercase border-2 border-[#1a232c] brutal-shadow-rose transition active:translate-x-1 active:translate-y-1 active:shadow-none cursor-pointer">
+            ◁ Retour
+        </button>
+        <button id="credits-trigger" class="text-[10px] font-mono tracking-widest text-sky/60 uppercase hover:text-sage transition cursor-pointer bg-transparent border-none outline-none">
+           DAHORD • Crédits • © 2026
+        </button>
+    </footer>
+
+    <!-- Fenêtre modale des Crédits -->
+    <div id="credits-modal" class="fixed inset-0 bg-[#1a232c]/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#283543] border-4 border-[#1a232c] rounded-2xl p-6 max-w-sm w-full brutal-shadow-rose text-center">
+            <div class="text-xs font-mono text-rosewood uppercase tracking-widest font-black mb-2">// AUTEUR //</div>
+            <h4 class="text-2xl font-black text-white mb-4 tracking-tight">Make by DAHORD with ❤️</h4>
+            <p class="text-xs text-sky leading-relaxed font-mono mb-6">
+                L'idée et la D.A. viennent<br>de 2 Personnes Extras : L & E <br> La conception et le développement sont 100% réalisés par mes soins... DAHORD <br><br>
+            </p>
+            <p class="text-xs text-sky leading-relaxed font-mono mb-6">
+                Mes réseaux : <br>
+                <a href="https://www.youtube.com/DAHORD-08/" target="_blank" class="text-rosewood font-bold hover:underline">YouTube</a> |
+                <a href="https://www.github.com/DAHORD-08/" target="_blank" class="text-sage font-bold hover:underline">GitHub</a> |
+                <a href="https://www.instagram.com/killian.lh08/" target="_blank" class="text-rosewood font-bold hover:underline">Instagram</a> |
+                <a href="https://dahord-08.github.io/discord-link/" target="_blank" class="text-sage font-bold hover:underline">Discord</a>
+            </p>
+            <button id="credits-close" class="w-full bg-sage text-[#2D3A47] font-black py-2.5 rounded-xl text-xs uppercase tracking-widest border-2 border-[#1a232c] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition">
+                Fermer
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- BANQUE DE DONNÉES DU JEU ---
+        const GAMES_DATABASE = {
+            preferences: [
+                { q: "Tu me vois plutôt passer mes vacances au soleil ou sous la neige ?", opts: ["Plage & Soleil ☀️", "Montagne & Neige ❄️"] },
+                { q: "Dans le groupe, je suis plutôt le cerveau ou le chaos ?", opts: ["Sérieux & Concentré 🧠", "Gros Délire & Chaos 🃏"] },
+                { q: "Pour une soirée parfaite, tu m'emmènes où ?", opts: ["Bar bondé / Fête 🍻", "Chill à la maison 🍿"] },
+                { q: "Si je devais choisir mon camp éternel :", opts: ["Team Sucré 🍫", "Team Salé 🍟"] },
+                { q: "Mon super-pouvoir d'après toi :", opts: ["Voler dans les airs 🦅", "Devenir invisible 👻"] },
+                { q: "Au réveil, je suis une pile ou un zombie ?", opts: ["Énergie maximale ☀️", "Ne me parle pas ☕"] }
+            ],
+            quiz: [
+                { q: "Quelle est ma plus grande phobie parmi ces choix ?", opts: ["Les araignées", "Le vide / la hauteur", "La foule", "Le noir complet"] },
+                { q: "Si je devais manger un seul plat jusqu'à la fin des temps ?", opts: ["Des Pâtes", "Des sushis", "Des burgers", "Des tacos"] },
+                { q: "Quel est le réseau social où je perds le plus mon temps ?", opts: ["TikTok", "Instagram", "YouTube", "Twitter / X"] },
+                { q: "Quel style de musique domine mes écouteurs ?", opts: ["Rap / Hip-hop", "Pop / Rock", "Électro / Techno", "Classique / Lo-Fi"] }
+            ]
+        };
+
+        const AppState = {
+            screen: 'game-choice', 
+            selectedGame: null,    
+            totalQuestions: 5,
+            questions: [],
+            currentIdx: 0,
+            creatorAnswers: [],    
+            playerAnswers: [],     
+            isCreatorMode: true    
+        };
+
+        const container = document.getElementById('screen-container');
+        const headerMode = document.getElementById('header-game-mode');
+        const headerIcon = document.getElementById('header-icon');
+        const headerIconBtn = document.getElementById('header-icon-btn');
+        const backBtn = document.getElementById('nav-back-btn');
+
+        // Modal Logique
+        const creditsTrigger = document.getElementById('credits-trigger');
+        const creditsModal = document.getElementById('credits-modal');
+        const creditsClose = document.getElementById('credits-close');
+
+        creditsTrigger.addEventListener('click', () => creditsModal.classList.remove('hidden'));
+        creditsModal.addEventListener('click', (e) => { if(e.target === creditsModal) creditsModal.classList.add('hidden'); });
+        creditsClose.addEventListener('click', () => creditsModal.classList.add('hidden'));
+
+        function render() {
+            container.classList.remove('fade-in');
+            void container.offsetWidth;
+            container.classList.add('fade-in');
+
+            backBtn.style.visibility = (AppState.screen === 'game-choice') ? 'hidden' : 'visible';
+
+            if (AppState.screen === 'num-questions' || AppState.screen === 'set-game') {
+                headerIconBtn.disabled = false;
+                headerIconBtn.classList.remove('cursor-default');
+                headerIconBtn.classList.add('cursor-pointer', 'hover:opacity-80');
+            } else {
+                headerIconBtn.disabled = true;
+                headerIconBtn.classList.remove('cursor-pointer', 'hover:opacity-80');
+                headerIconBtn.classList.add('cursor-default');
+            }
+
+            switch (AppState.screen) {
+                case 'game-choice':
+                    headerMode.innerText = "Sélection";
+                    headerMode.className = "text-xs uppercase font-extrabold tracking-wider bg-sage text-[#2D3A47] px-2.5 py-0.5 rounded-md border border-[#1a232c]";
+                    headerIcon.innerText = "🏠︎";
+                    renderGameChoice();
+                    break;
+                case 'num-questions':
+                    headerMode.innerText = "Configuration";
+                    headerMode.className = "text-xs uppercase font-extrabold tracking-wider bg-rosewood text-white px-2.5 py-0.5 rounded-md border border-[#1a232c]";
+                    headerIcon.innerText = "🎲";
+                    renderNumQuestions();
+                    break;
+                case 'set-game':
+                    headerMode.innerText = AppState.isCreatorMode ? "Création (Toi)" : "Défi (BFF)";
+                    headerMode.className = AppState.isCreatorMode ? "text-xs uppercase font-extrabold tracking-wider bg-sage text-[#2D3A47] px-2.5 py-0.5 rounded-md border border-[#1a232c]" : "text-xs uppercase font-extrabold tracking-wider bg-rosewood text-white px-2.5 py-0.5 rounded-md border border-[#1a232c]";
+                    headerIcon.innerText = "🎲";
+                    renderMoteurJeu();
+                    break;
+                case 'ready-transition':
+                    headerMode.innerText = "Chargement";
+                    headerMode.className = "text-xs uppercase font-extrabold tracking-wider bg-sky text-[#2D3A47] px-2.5 py-0.5 rounded-md border border-[#1a232c]";
+                    headerIcon.innerText = "🏁";
+                    renderReadyTransition();
+                    break;
+                case 'results':
+                    headerMode.innerText = "Verdict";
+                    headerMode.className = "text-xs uppercase font-extrabold tracking-wider bg-sage text-[#2D3A47] px-2.5 py-0.5 rounded-md border border-[#1a232c]";
+                    headerIcon.innerText = "🏆";
+                    renderResults();
+                    break;
+            }
+        }
+
+        headerIconBtn.addEventListener('click', () => {
+            if (AppState.screen === 'num-questions') {
+                const buttons = container.querySelectorAll('.btn-num-select');
+                if (buttons.length > 0) {
+                    const randomBtn = buttons[Math.floor(Math.random() * buttons.length)];
+                    randomBtn.click();
+                }
+            } else if (AppState.screen === 'set-game') {
+                const buttons = container.querySelectorAll('.btn-game-option');
+                if (buttons.length > 0 && buttons[0].style.pointerEvents !== 'none') {
+                    const randomBtn = buttons[Math.floor(Math.random() * buttons.length)];
+                    randomBtn.click();
+                }
+            }
+        });
+
+        // --- ÉCRAN 1 : CHOIX DU JEU ---
+        function renderGameChoice() {
+            container.innerHTML = `
+                <div class="flex flex-col items-center">
+                    <div class="w-full py-6 border-4 border-[#1a232c] flex justify-center bg-[#283543] rounded-2xl brutal-shadow-sky mb-12" style="margin-top: -40px; relative; z-index: 1;">
+                        <span class="text-sm font-black tracking-[0.25em] text-sky font-mono text-left inline-block border-l-4 border-rosewood pl-4">
+                           B • BEST GAME<br>F • FUN ONLY<br>F • FOR EVER
+                        </span>
+                    </div>
+                    
+                    <h1 class="text-4xl font-black uppercase tracking-tighter mb-10 text-white text-center transform -rotate-1 bg-[#1a232c] px-4 py-2 rounded-xl border-2 border-dashed border-sky/30" style="margin-top: 40px; margin-bottom: 80px">
+                        Quel &ensp; Jeu ?
+                    </h1>
+                    
+                    <div class="flex flex-col gap-6 w-full">
+                        <button id="btn-choice-pref" class="w-full bg-[#283543] border-4 border-[#1a232c] p-6 rounded-2xl text-left font-black text-lg transition flex justify-between items-center cursor-pointer brutal-shadow-sage hover:translate-x-1 hover:translate-y-1 hover:shadow-none active:scale-[0.99]" style="margin-bottom: 10px;">
+                            <span class="text-white" style="margin-left: 10px;">Tu Préfères</span>
+                            <span class="text-xs bg-sage text-[#2D3A47] px-3 py-1.5 rounded-lg font-mono font-black border-2 border-[#1a232c]">2 Choix ✌️</span>
+                        </button>
+                        
+                        <button id="btn-choice-quiz" class="w-full bg-[#283543] border-4 border-[#1a232c] p-6 rounded-2xl text-left font-black text-lg transition flex justify-between items-center cursor-pointer brutal-shadow-rose hover:translate-x-1 hover:translate-y-1 hover:shadow-none active:scale-[0.99]">
+                            <span class="text-white" style="margin-left: 10px;">Quiz</span>
+                            <span class="text-xs bg-rosewood text-white px-3 py-1.5 rounded-lg font-mono font-black border-2 border-[#1a232c]">4 Choix ✌️✌️</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('btn-choice-pref').addEventListener('click', () => selectGame('preferences'));
+            document.getElementById('btn-choice-quiz').addEventListener('click', () => selectGame('quiz'));
+        }
+
+        function selectGame(type) {
+            AppState.selectedGame = type;
+            AppState.screen = 'num-questions';
+            render();
+        }
+
+        // --- ÉCRAN 2 : NOMBRE DE QUESTIONS ---
+        function renderNumQuestions() {
+            container.innerHTML = `
+                <div class="text-center">
+                    <h2 class="text-3xl font-black uppercase tracking-tight mb-2 text-white">Nombre de Questions ?</h2>
+                    <p class="text-xs text-sky mb-8 font-mono bg-[#1a232c] inline-block px-3 py-1 rounded-md border border-sky/10" style="margin-top: 20px; margin-bottom: 40px;">🎲 Clic sur le dé en haut pour l'aléatoire</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        ${[5, 10, 15, 20].map((num, idx) => {
+                        // Modification ici pour assigner les couleurs par numéro :
+                        let brutalStyle = 'brutal-shadow-sage text-sage hover:bg-sage/10'; // Couleur par défaut (Vert/Sage pour 5 et 10)
+                            
+                        if (num === 10) {
+                            brutalStyle = 'brutal-shadow-rose text-rosewood hover:bg-rosewood/10'; // Rosewood pour le 10
+                        }
+                        else if (num === 15) {
+                            brutalStyle = 'brutal-shadow-rose text-rosewood hover:bg-rosewood/10'; // Rosewood pour le 15
+                        }
+
+                        return `
+                        <button data-num="${num}" class="btn-num-select py-6 rounded-2xl font-mono text-2xl font-black transition cursor-pointer bg-[#283543] border-4 border-[#1a232c] hover:translate-x-1 hover:translate-y-1 hover:shadow-none ${brutalStyle}">
+                        ${num}
+                        </button>
+                        `;
+                    }).join('')}
+                    </div>
+
+                    <div class="border-4 border-[#1a232c] text-left bg-[#283543] p-5 rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]" style="margin-top: 40px;">
+                        <span class="text-xs font-mono uppercase tracking-widest text-rosewood block mb-2 font-black">⚙️ Moteur de Synchronisation :</span>
+                        <p class="text-xs text-slate-300 font-medium leading-relaxed">
+                            Tu vas d'abord enregistrer tes choix réponses. Ton/ta BFF devra ensuite reproduire sans fautes ta matrice de pensée.
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            container.querySelectorAll('.btn-num-select').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    AppState.totalQuestions = parseInt(this.getAttribute('data-num'));
+                    const baseQuestions = GAMES_DATABASE[AppState.selectedGame];
+                    AppState.questions = [];
+                    for(let i = 0; i < AppState.totalQuestions; i++) {
+                        AppState.questions.push(baseQuestions[i % baseQuestions.length]);
+                    }
+                    AppState.isCreatorMode = true;
+                    AppState.currentIdx = 0;
+                    AppState.creatorAnswers = [];
+                    AppState.playerAnswers = [];
+                    AppState.screen = 'set-game';
+                    render();
+                });
+            });
+        }
+
+        // --- ÉCRANS DE JEU ---
+        function renderMoteurJeu() {
+            const currentQuestion = AppState.questions[AppState.currentIdx];
+            const total = AppState.totalQuestions;
+            const currentNum = AppState.currentIdx + 1;
+            const isPref = AppState.selectedGame === 'preferences';
+
+            let optionsHtml = '';
+
+            if (isPref) {
+                optionsHtml = `
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full min-h-[260px]">
+                        <button data-idx="0" class="btn-game-option h-full bg-[#283543] border-4 border-[#1a232c] rounded-2xl p-6 text-center transition cursor-pointer flex flex-col justify-between items-center brutal-shadow-sage hover:translate-x-1 hover:translate-y-1 hover:shadow-none group">
+                            <span class="text-base font-black text-white group-hover:text-sage transition my-auto">${currentQuestion.opts[0]}</span>
+                            <div class="radio-dot w-6 h-6 rounded-xl border-2 border-[#1a232c] bg-white/5 flex items-center justify-center mt-4"></div>
+                        </button>
+                        
+                        <button data-idx="1" class="btn-game-option h-full bg-[#283543] border-4 border-[#1a232c] rounded-2xl p-6 text-center transition cursor-pointer flex flex-col justify-between items-center brutal-shadow-rose hover:translate-x-1 hover:translate-y-1 hover:shadow-none group">
+                            <span class="text-base font-black text-white group-hover:text-rosewood transition my-auto">${currentQuestion.opts[1]}</span>
+                            <div class="radio-dot w-6 h-6 rounded-xl border-2 border-[#1a232c] bg-white/5 flex items-center justify-center mt-4"></div>
+                        </button>
+                    </div>
+                `;
+            } else {
+                optionsHtml = `
+                    <div class="flex flex-col gap-4 w-full">
+                        ${currentQuestion.opts.map((opt, idx) => `
+                            <button data-idx="${idx}" class="btn-game-option w-full bg-[#283543] border-4 border-[#1a232c] p-4 rounded-xl text-left text-sm font-black transition cursor-pointer flex justify-between items-center brutal-shadow-rose hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none">
+                                <span>${opt}</span>
+                                <span class="radio-dot w-5 h-5 rounded-lg border-2 border-[#1a232c] bg-white/5 block flex-shrink-0 ml-4"></span>
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="flex flex-col w-full">
+                    <div class="flex justify-between items-center mb-6 bg-[#1a232c] p-3 rounded-xl border border-sky/10">
+                        <span class="text-[10px] font-mono font-black uppercase tracking-widest text-sky">
+                            ${AppState.isCreatorMode ? 'MATRICE // CRÉATEUR' : 'SYNCHRO // DEFI BFF'}
+                        </span>
+                        <span class="text-xs font-mono font-black text-sage bg-[#283543] border-2 border-[#1a232c] px-3 py-0.5 rounded-md">${currentNum} / ${total}</span>
+                    </div>
+
+                    <h3 class="text-xl font-black text-white mb-8 leading-snug text-center bg-[#283543] border-4 border-[#1a232c] p-5 rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,0.15)]">
+                        ${currentQuestion.q}
+                    </h3>
+
+                    ${optionsHtml}
+                    
+                    <div class="w-full bg-[#1a232c] h-5 rounded-xl mt-10 p-1 border-2 border-sky/10 relative overflow-hidden">
+                        <div class="bg-gradient-to-r from-sage to-rosewood h-full rounded-lg transition-all duration-300 border-r-2 border-[#1a232c]" style="width: ${(currentNum / total) * 100}%"></div>
+                    </div>
+                </div>
+            `;
+
+            const buttons = container.querySelectorAll('.btn-game-option');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const selectedIdx = parseInt(this.getAttribute('data-idx'));
+                    
+                    if (AppState.isCreatorMode) {
+                        AppState.creatorAnswers[AppState.currentIdx] = selectedIdx;
+                        const dot = this.querySelector('.radio-dot');
+                        
+                        if (isPref) {
+                            if (selectedIdx === 0) {
+                                dot.style.backgroundColor = 'var(--sage-leaf)';
+                                this.style.borderColor = 'var(--sage-leaf)';
+                            } else {
+                                dot.style.backgroundColor = 'var(--rosewood)';
+                                this.style.borderColor = 'var(--rosewood)';
+                            }
+                        } else {
+                            dot.style.backgroundColor = 'var(--sage-leaf)';
+                            this.style.borderColor = 'var(--sage-leaf)';
+                        }
+                        
+                        setTimeout(() => { goToNextQuestion(); }, 220);
+                    } else {
+                        buttons.forEach(b => b.style.pointerEvents = 'none');
+                        const correctIdx = AppState.creatorAnswers[AppState.currentIdx];
+                        AppState.playerAnswers[AppState.currentIdx] = selectedIdx;
+
+                        buttons.forEach(b => {
+                            const idx = parseInt(b.getAttribute('data-idx'));
+                            const dot = b.querySelector('.radio-dot');
+                            if (idx === correctIdx) {
+                                b.style.borderColor = 'var(--sage-leaf)';
+                                b.style.backgroundColor = 'rgba(168, 181, 138, 0.1)';
+                                dot.style.backgroundColor = 'var(--sage-leaf)';
+                            } else if (idx === selectedIdx) {
+                                b.style.borderColor = 'var(--rosewood)';
+                                b.style.backgroundColor = 'rgba(180, 106, 114, 0.1)';
+                                dot.style.backgroundColor = 'var(--rosewood)';
+                            }
+                        });
+
+                        setTimeout(() => { goToNextQuestion(); }, 900);
+                    }
+                });
+            });
+        }
+
+        function goToNextQuestion() {
+            if (AppState.currentIdx < AppState.totalQuestions - 1) {
+                AppState.currentIdx++;
+                render();
+            } else {
+                if (AppState.isCreatorMode) {
+                    AppState.isCreatorMode = false;
+                    AppState.screen = 'ready-transition';
+                } else {
+                    AppState.screen = 'results';
+                }
+                render();
+            }
+        }
+
+        // --- ÉCRAN 4 : L'ÉCRAN "READY GO" EN FORME DE POINT D'INTERROGATION (?) ---
+        function renderReadyTransition() {
+            container.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-2 select-none">
+                    
+                    <!-- Conteneur Global réajusté à h-[420px] pour créer un espacement vertical plus grand -->
+                    <div class="relative w-72 h-[420px] flex flex-col items-center animate-float" style="margin-top: -10px; margin-bottom: 20px;">
+                        
+                        <!-- L'Arc Supérieur (La Boucle R-E-A-D-Y) -->
+                        <div class="absolute top-0 w-full h-44 font-black font-mono text-5xl tracking-tighter" style="margin-top: -20px;">
+                            <!-- R : Haut Gauche -->
+                            <span class="absolute left-15 top-8 text-sky/75 transform -rotate-12">R</span>
+                            <!-- E : Sommet Gauche -->
+                            <span class="absolute left-35 top-0 text-sky transform -rotate-6">E</span>
+                            <!-- A : Sommet Droite Extrême -->
+                            <span class="absolute right-15 top-12 text-rosewood transform rotate-3">A</span>
+                            <!-- D : Descente Droite -->
+                            <span class="absolute right-27 top-32 text-sage transform rotate-12">D</span>
+                            <!-- Y : Courbe rentrante vers le centre bas -->
+                            <span class="absolute right-30 top-54 text-sky/75 transform -rotate-6">Y</span>
+                        </div>
+
+                        <!-- La bulle GO reste ancrée en bas, désormais plus éloignée du READY -->
+                        <div class="absolute bottom-0 w-full flex justify-center pb-2">
+                            <!-- Le Point Final : Bulle de contrôle contenant le mot GO -->
+                            <button id="btn-start-bff" class="w-24 h-24 rounded-full bg-[#283543] text-sage font-black text-3xl border-4 border-[#1a232c] shadow-[0px_8px_0px_0px_rgba(26,35,44,1)] tracking-wider flex items-center justify-center transition transform cursor-pointer hover:bg-white hover:text-rosewood active:translate-y-1 active:shadow-[0px_4px_0px_0px_rgba(26,35,44,1)]">
+                                GO
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p class="text-xs font-mono text-center text-sky/80 mt-6 bg-[#1a232c] border border-sky/10 px-4 py-3 rounded-xl max-w-sm leading-relaxed">
+                        Passe ton téléphone ou écran à ton/ta BFF. C'est à son tour de s'aligner sur ta grille !
+                    </p>
+                </div>
+            `;
+
+            document.getElementById('btn-start-bff').addEventListener('click', () => {
+                AppState.currentIdx = 0;
+                AppState.screen = 'set-game';
+                render();
+            });
+        }
+
+        // --- ÉCRAN 5 : LES RÉSULTATS FINAUX ---
+        function renderResults() {
+            let score = 0;
+            for (let i = 0; i < AppState.totalQuestions; i++) {
+                if (AppState.playerAnswers[i] === AppState.creatorAnswers[i]) {
+                    score++;
+                }
+            }
+
+            const performance = score / AppState.totalQuestions;
+            let feedback = "";
+            let brutalBorder = "brutal-shadow-sage border-sage text-sage";
+
+            if (performance === 1) {
+                feedback = "Télépathie totale absolue ! Vous partagez l'unique et même cerveau. C'est presque effrayant. 👑";
+                brutalBorder = "brutal-shadow-sage border-sage text-sage bg-sage/5";
+            } else if (performance >= 0.6) {
+                feedback = "Une résonance hautement solide ! L'alignement est validé à l'unanimité. 🔥";
+                brutalBorder = "brutal-shadow-sky border-sky text-white bg-sky/5";
+            } else {
+                feedback = "Matrice désynchronisée. Une mise au point physique s'impose au plus vite. 📉";
+                brutalBorder = "brutal-shadow-rose border-rosewood text-rosewood bg-rosewood/5";
+            }
+
+            container.innerHTML = `
+                <div class="text-center">
+                    <span class="text-xs font-mono font-black tracking-widest uppercase bg-[#1a232c] text-sky px-3 py-1 rounded border border-sky/10">Verdict Analytique</span>
+                    
+                    <div class="text-6xl font-black font-mono my-8 tracking-tighter text-white bg-[#283543] border-4 border-[#1a232c] py-6 rounded-2xl shadow-[6px_6px_0px_0px_rgba(0,0,0,0.3)]">
+                        <span class="text-sage">${score}</span><span class="text-sky/30">/</span><span class="text-rosewood">${AppState.totalQuestions}</span>
+                    </div>
+
+                    <div class="p-5 border-4 rounded-2xl text-sm font-black leading-relaxed mb-10 ${brutalBorder}">
+                        ${feedback}
+                    </div>
+
+                    <button id="btn-restart" class="w-full bg-rosewood text-white font-black py-4 px-6 rounded-xl transition text-xs uppercase tracking-widest border-4 border-[#1a232c] brutal-shadow-rose hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none cursor-pointer active:scale-95">
+                        REINITIALISER LA SYNCHRONISATION
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('btn-restart').addEventListener('click', () => {
+                AppState.screen = 'game-choice';
+                AppState.selectedGame = null;
+                render();
+            });
+        }
+
+        // --- ROUTAGE BOUTON RETOUR ---
+        backBtn.addEventListener('click', () => {
+            if (AppState.screen === 'num-questions') {
+                AppState.screen = 'game-choice';
+            } else if (AppState.screen === 'set-game' && AppState.isCreatorMode && AppState.currentIdx > 0) {
+                AppState.currentIdx--;
+            } else if (AppState.screen === 'set-game' && AppState.isCreatorMode && AppState.currentIdx === 0) {
+                AppState.screen = 'num-questions';
+            } else {
+                AppState.screen = 'game-choice';
+            }
+            render();
+        });
+
+        window.onload = render;
+    </script>
+</body>
+</html>
