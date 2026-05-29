@@ -121,18 +121,102 @@
         // --- BANQUE DE DONNÉES DU JEU ---
         const GAMES_DATABASE = {
             preferences: [
+                // --- Lifestyle & Habitudes (1 à 10) ---
                 { q: "Tu me vois plutôt passer mes vacances au soleil ou sous la neige ?", opts: ["Plage & Soleil ☀️", "Montagne & Neige ❄️"] },
-                { q: "Dans le groupe, je suis plutôt le cerveau ou le chaos ?", opts: ["Sérieux & Concentré 🧠", "Gros Délire & Chaos 🃏"] },
                 { q: "Pour une soirée parfaite, tu m'emmènes où ?", opts: ["Bar bondé / Fête 🍻", "Chill à la maison 🍿"] },
+                { q: "Au réveil, je suis une pile ou un zombie ?", opts: ["Énergie maximale ☀️", "Ne me parle pas ☕"] },
+                { q: "Mon style de vêtements au quotidien, c'est plutôt :", opts: ["Toujours sur mon 31 👔", "Confort avant tout / Streetwear 👟"] },
+                { q: "Face à une série addictive, je suis plutôt :", opts: ["Un épisode par semaine 📺", "Tout binge-watcher en une nuit 🦉"] },
+                { q: "Pour planifier un voyage, je suis :", opts: ["Organisation millimétrée 🗺️", "Improvisation totale 🎒"] },
+                { q: "En cuisine, je me positionne comment ?", opts: ["Chef étoilé inspiré 🍳", "Spécialiste du micro-ondes 🍕"] },
+                { q: "Pour écouter de la musique, je préfère :", opts: ["Un casque / Écouteurs pour m'isoler 🎧", "Des enceintes à fond pour partager 🔊"] },
+                { q: "Ma méthode de travail ou de révision :", opts: ["Anticipation et calme 🗓️", "Rush de dernière minute sous adrénaline ⚡"] },
+                { q: "Mon rapport aux réseaux sociaux :", opts: ["Créateur actif / Je poste souvent 📸", "Fantôme / Je regarde sans rien dire 👻"] },
+
+                // --- Personnalité & Social (11 à 20) ---
+                { q: "Dans le groupe, je suis plutôt le cerveau ou le chaos ?", opts: ["Sérieux & Concentré 🧠", "Gros Délire & Chaos 🃏"] },
                 { q: "Si je devais choisir mon camp éternel :", opts: ["Team Sucré 🍫", "Team Salé 🍟"] },
+                { q: "En cas de conflit, ma réaction naturelle est :", opts: ["La discussion calme 🗣️", "La fuite ou le silence 😶"] },
+                { q: "Mon rapport aux secrets des autres :", opts: ["Une vraie tombe 🤫", "Parfois ça m'échappe... 🤭"] },
+                { q: "Dans une fête, on me trouve généralement :", opts: ["Au centre de la piste 🕺", "À discuter au calme sur le canapé 🛋️"] },
+                { q: "Mon niveau de patience face aux technologies en panne :", opts: ["Zen, je cherche la solution 🛠️", "Enragé, je veux tout casser 🌋"] },
+                { q: "Face à une rencontre avec une nouvelle personne :", opts: ["Très extraverti / À l'aise d'un coup 🤝", "Réservé / J'observe d'abord 🕒"] },
+                { q: "Pour prendre une décision importante, je屋外 écoute :", opts: ["Ma logique et ma tête 🧠", "Mon instinct et mon cœur ❤️"] },
+                { q: "Si on me fait une surprise non planifiée :", opts: ["J'adore l'imprévu ! 🎉", "Ça me stresse un peu... 📈"] },
+                { q: "Mon attitude face aux ragots / potins :", opts: ["J'adore tout savoir, dis-moi tout 👀", "Ça ne m'intéresse pas du tout 😴"] },
+
+                // --- Dilemmes & Super-pouvoirs (21 à 30) ---
                 { q: "Mon super-pouvoir d'après toi :", opts: ["Voler dans les airs 🦅", "Devenir invisible 👻"] },
-                { q: "Au réveil, je suis une pile ou un zombie ?", opts: ["Énergie maximale ☀️", "Ne me parle pas ☕"] }
+                { q: "Si je devais choisir mon destin technologique :", opts: ["Vivre dans le futur (3026) 🚀", "Retourner dans le passé (1990) 📼"] },
+                { q: "Pour le restant de mes jours, je préfère :", opts: ["Avoir tout le temps trop chaud 🔥", "Avoir tout le temps trop froid ❄️"] },
+                { q: "Si je gagne à la loterie demain :", opts: ["Je le dis à tout le monde 🎉", "Je garde le secret absolu 🤐"] },
+                { q: "Dans un film d'horreur, je suis le personnage qui :", opts: ["Survit grâce à sa logique 🏃", "Meurt en premier bêtement 🪓"] },
+                { q: "Tu préfères que je devienne :", opts: ["Un vampire immortel 🧛", "Un loup-garou surpuissant 🐺"] },
+                { q: "Si je devais perdre un sens définitivement :", opts: ["L'odorat 👃", "Le goût 👅"] },
+                { q: "Je préfère voyager pour le restant de ma vie en :", opts: ["Première classe mais seul 👤", "Classe éco mais avec tous mes amis ✈️"] },
+                { q: "Pour me déplacer en ville, je choisis :", opts: ["La rapidité du métro / transports 🚇", "La liberté de la marche / vélo 🚲"] },
+                { q: "Si je devais adopter un animal fantastique :", opts: ["Un dragon majestueux 🐉", "Un phénix immortel 🦅"] },
+
+                // --- Préférences Matérielles & Culturelles (31 à 40) ---
+                { q: "Mon support de lecture favori :", opts: ["Un vrai livre en papier 📖", "Une liseuse / Écran 📱"] },
+                { q: "En termes de jeux vidéo, je suis plutôt :", opts: ["Multijoueur compétitif 🎮", "Histoire solo immersive 🕹️"] },
+                { q: "Le format de vidéo que je consomme le plus :", opts: ["Vidéos longues / Essais / Vlogs 🎬", "Shorts / Reels / TikTok rapides ⚡"] },
+                { q: "Mon type de temps idéal pour rester productif :", opts: ["Grand soleil et ciel bleu ☀️", "Temps pluvieux et ambiance cocooning 🌧️"] },
+                { q: "Si je devais choisir une seule option de confort :", opts: ["Un lit de palace incroyable 🛏️", "Une douche / baignoire de rêve 🛁"] },
+                { q: "Mon rapport à la nostalgie :", opts: ["Toujours nostalgique du passé 📻", "Toujours tourné vers l'avenir 🔮"] },
+                { q: "Pour consommer de l'art, je préfère :", opts: ["Un musée d'art moderne 🎨", "Un concert de musique live 🎸"] },
+                { q: "Si je devais choisir un style d'habitation :", opts: ["Appartement moderne en plein centre-ville 🏙️", "Maison isolée en pleine nature 🌲"] },
+                { q: "Pour regarder un film, je choisis en premier :", opts: ["L'expérience immersive du cinéma 🎬", "Le confort de mon canapé / lit 🛋️"] },
+                { q: "Mon type de humour favori :", opts: ["Humour absurde / Second degré 🃏", "Ironie piquante / Sarcasme 🛠️"] }
             ],
             quiz: [
+                // --- Habitudes & Consommation (1 à 10) ---
                 { q: "Quelle est ma plus grande phobie parmi ces choix ?", opts: ["Les araignées", "Le vide / la hauteur", "La foule", "Le noir complet"] },
                 { q: "Si je devais manger un seul plat jusqu'à la fin des temps ?", opts: ["Des Pâtes", "Des sushis", "Des burgers", "Des tacos"] },
                 { q: "Quel est le réseau social où je perds le plus mon temps ?", opts: ["TikTok", "Instagram", "YouTube", "Twitter / X"] },
-                { q: "Quel style de musique domine mes écouteurs ?", opts: ["Rap / Hip-hop", "Pop / Rock", "Électro / Techno", "Classique / Lo-Fi"] }
+                { q: "Quel style de musique domine mes écouteurs ?", opts: ["Rap / Hip-hop", "Pop / Rock", "Électro / Techno", "Classique / Lo-Fi"] },
+                { q: "Quelle est ma boisson de prédilection en journée ?", opts: ["Le café noir", "Le thé / Infusion", "Les sodas", "L'eau pure"] },
+                { q: "Si je devais choisir une plateforme de streaming principale ?", opts: ["Netflix", "Prime Video", "Disney+", "Crunchyroll / Anime"] },
+                { q: "Quel est mon dessert ultime au restaurant ?", opts: ["Fondant au chocolat", "Tiramisu", "Crème brûlée", "Café gourmand"] },
+                { q: "Quelle est ma réaction principale face à une notification ?", opts: ["Je réponds à la seconde", "Je lis et je réponds plus tard", "Je laisse accumuler des dizaines de messages", "Mon téléphone est constamment en mode ne pas déranger"] },
+                { q: "Quel type de snacks je choisis devant un film ?", opts: ["Pop-corn", "Chips / Biscuits salés", "Bonbons acidulés", "Chocolat / Glace"] },
+                { q: "Si je devais apprendre une nouvelle langue demain ?", opts: ["Le japonais", "L'espagnol", "L'anglais (perfectionnement)", "Le coréen"] },
+
+                // --- Personnalité & Profil (11 à 20) ---
+                { q: "Quel achat impulsif me correspondrait le mieux ?", opts: ["Des vêtements de marque", "Des gadgets technologiques", "De la nourriture / Restos", "Des objets déco inutiles"] },
+                { q: "Quelle est ma pire habitude selon mes proches ?", opts: ["Être toujours en retard", "Être trop têtu(e)", "Passer trop de temps sur mon téléphone", "Dépenser mon argent trop vite"] },
+                { q: "Quel genre cinématographique capte le plus mon attention ?", opts: ["Science-fiction / Fantastique", "Comédie / Humour", "Thriller / Horreur", "Drame / Historique"] },
+                { q: "Si je devais participer à une émission de TV, ce serait :", opts: ["Koh-Lanta", "Qui veut gagner des millions", "Top Chef", "Une émission de télé-réalité"] },
+                { q: "Quelle est ma saison préférée de l'année ?", opts: ["Le printemps", "L'été", "L'automne", "L'hiver"] },
+                { q: "Comment je réagis en cas de grosse fatigue ?", opts: ["Je dors pendant 12 heures", "Je deviens extrêmement irritable", "Je mange énormément", "Je bois du café en boucle pour tenir"] },
+                { q: "Quel est mon rapport aux jeux de société ?", opts: ["Mauvais perdant mais j'adore", "Stratège silencieux qui gagne tout", "Là uniquement pour rigoler", "Je déteste ça"] },
+                { q: "Quelle est ma plus grande qualité selon mes amis ?", opts: ["La loyauté / Toujours présent", "L'humour / Fait rire tout le monde", "L'écoute / De bons conseils", "Le dynamisme / Propose toujours des sorties"] },
+                { q: "Si je devais décrire mon sommeil :", opts: ["Lourd (un séisme ne me réveille pas)", "Léger (le moindre bruit me réveille)", "Insomniaque chronique", "Agité (je bouge énormément)"] },
+                { q: "Quel type de menteur suis-je ?", opts: ["Excellent (personne ne s'en rend compte)", "Moyen (on voit mes expressions)", "Horrible (je commence à rire)", "Je ne mens jamais"] },
+
+                // --- Projets & Ambitions (21 à 30) ---
+                { q: "Si je changeais radicalement de métier, je serais plutôt :", opts: ["Artiste / Créateur", "Artisan / Métiers manuels", "Entrepreneur / Start-upper", "Guide de voyage / Aventurier"] },
+                { q: "Quel est mon principal critère pour choisir un logement ?", opts: ["La taille de la cuisine", "La connexion internet / Un bureau", "La présence d'un balcon / jardin", "La proximité des transports / commerces"] },
+                { q: "Quel type d'animal de compagnie me ressemble le plus ?", opts: ["Un chat indépendant", "Un chien fidèle et joueur", "Un reptile exotique", "Aucun, j'aime trop ma liberté"] },
+                { q: "Dans un jeu vidéo de rôle (RPG), quelle classe je choisirais ?", opts: ["Guerrier / Bourrin", "Mage / Sorcier", "Voleur / Assassin", "Soigneur / Support"] },
+                { q: "Quelle est ma destination de voyage de rêve absolue ?", opts: ["Tokyo (Japon)", "New York (USA)", "Reykjavik (Islande)", "Bora Bora (Polynésie)"] },
+                { q: "Quelle compétence inutile j'aimerais maîtriser à la perfection ?", opts: ["Savoir jongler", "Imiter parfaitement des voix", "Résoudre un Rubik's cube en 5 secondes", "Faire des tours de magie avec des cartes"] },
+                { q: "Comment je gère mon budget mensuel ?", opts: ["Comptabilité précise sur Excel", "Je vérifie mon compte de temps en temps", "Je dépense sans compter jusqu'au refus de carte", "Économe extrême, je ne dépense que le strict minimum"] },
+                { q: "Quel est mon objectif principal dans la vie actuelle ?", opts: ["Réussir ma carrière professionnelle", "Voyager et découvrir le monde", "Trouver la paix intérieure / Être heureux", "Fonder une famille / Construire un foyer"] },
+                { q: "Si je devais écrire un livre, quel en serait le sujet ?", opts: ["Un roman fantastique", "Mon autobiographie", "Un guide pratique / de développement personnel", "Un thriller psychologique"] },
+                { q: "Quel est mon niveau d'anglais réel d'après toi ?", opts: ["Bilingue parfait", "Courant / Je comprends tout", "Intermédiaire (scolaire)", "Notions très vagues / 'Yes, no, toaster'"] },
+
+                // --- Culture G & Anecdotes (31 à 40) ---
+                { q: "Quel est mon super-héros ou univers favori ?", opts: ["Marvel (Spider-Man, Iron Man...)", "DC Comics (Batman, Superman...)", "Star Wars", "Le Seigneur des Anneaux"] },
+                { q: "Si je devais participer aux Jeux Olympiques, ce serait en :", opts: ["Sprint / Athlétisme", "Natation", "Tir à l'arc / Précision", "Escrime / Combat"] },
+                { q: "Quelle corvée ménagère je déteste le plus au monde ?", opts: ["Faire la vaisselle", "Passer l'aspirateur / Serpillière", "Repasser le linge", "Sortir les poubelles"] },
+                { q: "Quelle est ma décennie musicale préférée ?", opts: ["Les années 80 (Synthpop/Rock)", "Les années 90 (Eurodance/Rap)", "Les années 2000 (Pop/RnB)", "Les années actuelles"] },
+                { q: "Si je devais collectionner quelque chose, ce serait :", opts: ["Des figurines / Funko Pops", "Des baskets / Sneakers", "Des vinyles / CD", "Des cartes à jouer (Pokémon, Magic...)"] },
+                { q: "Quel type de musée a le plus de chance de m'intéresser ?", opts: ["Musée des sciences / Espace", "Musée d'histoire ancienne", "Musée d'art contemporain", "Musée de l'automobile / design"] },
+                { q: "Quelle est ma position par rapport aux films d'animation ?", opts: ["J'adore les Disney / Pixar classiques", "Je préfère les animés japonais (Ghibli...)", "Je n'en regarde que très rarement", "Je trouve ça réservé aux enfants"] },
+                { q: "Quel est l'élément de la nature qui me correspond le mieux ?", opts: ["Le Feu (Passionné et impulsif)", "L'Eau (Calme et adaptable)", "La Terre (Stable et réaliste)", "L'Air (Libre et rêveur)"] },
+                { q: "Si je devais survivre à une apocalypse zombie, ma stratégie serait :", opts: ["Me barricader dans un supermarché", "Fuir vers une île déserte ou la montagne", "Créer un groupe de survivants armés", "Devenir un zombie dès le premier jour"] },
+                { q: "Quel est mon rapport avec la conduite / la voiture ?", opts: ["Pilote dans l'âme / J'adore conduire", "Conduite calme / Simple moyen de transport", "Je stresse énormément au volant", "Je n'ai pas le permis / Je préfère être passager"] }
             ]
         };
 
@@ -306,11 +390,19 @@
             container.querySelectorAll('.btn-num-select').forEach(btn => {
                 btn.addEventListener('click', function() {
                     AppState.totalQuestions = parseInt(this.getAttribute('data-num'));
-                    const baseQuestions = GAMES_DATABASE[AppState.selectedGame];
-                    AppState.questions = [];
-                    for(let i = 0; i < AppState.totalQuestions; i++) {
-                        AppState.questions.push(baseQuestions[i % baseQuestions.length]);
+        
+                    // Copie superficielle de la base de données pour ne pas altérer l'originale
+                    const baseQuestions = [...GAMES_DATABASE[AppState.selectedGame]];
+        
+                // Algorithme de mélange (Shuffle) pour garantir un hasard parfait sans doublon
+                    for (let i = baseQuestions.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [baseQuestions[i], baseQuestions[j]] = [baseQuestions[j], baseQuestions[i]];
                     }
+        
+                    // Extraction du nombre exact de questions demandées
+                    AppState.questions = baseQuestions.slice(0, AppState.totalQuestions);
+        
                     AppState.isCreatorMode = true;
                     AppState.currentIdx = 0;
                     AppState.creatorAnswers = [];
